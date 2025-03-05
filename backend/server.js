@@ -5,7 +5,7 @@ require("dotenv").config();
 
 // import routes
 const loginRoutes = require("./routes/loginRoutes");
-const taskRoutes = require("./routes/taskRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
@@ -15,7 +15,7 @@ app.use(express.json());
 
 // use routes
 app.use("/login", loginRoutes);
-app.use("/tasks", taskRoutes);
+app.use("/users", userRoutes);
 
 // set port server will listen on
 const PORT = process.env.PORT;
