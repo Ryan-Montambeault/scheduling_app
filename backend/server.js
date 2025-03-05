@@ -4,7 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 // import routes
-const userRoutes = require("./routes/userRoutes");
+const loginRoutes = require("./routes/loginRoutes");
 const taskRoutes = require("./routes/taskRoutes");
 
 const app = express();
@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 // use routes
-app.use("/users", userRoutes);
+app.use("/login", loginRoutes);
 app.use("/tasks", taskRoutes);
 
 // set port server will listen on
