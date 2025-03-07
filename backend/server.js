@@ -1,11 +1,11 @@
 // import modules
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
 
 // import routes
-const loginRoutes = require("./routes/loginRoutes");
-const userRoutes = require("./routes/userRoutes");
+const authentication = require("./routes/authentication");
+const taskRoutes = require("./routes/taskRoutes");
 
 const app = express();
 
@@ -14,9 +14,9 @@ app.use(cors());
 app.use(express.json());
 
 // use routes
-app.use("/login", loginRoutes);
-app.use("/users", userRoutes);
+app.use("/authentication", authentication);
+app.use("/users", taskRoutes);
 
 // set port server will listen on
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
