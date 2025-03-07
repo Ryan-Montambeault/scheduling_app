@@ -8,6 +8,8 @@ NOTE: The backend server will have to be run as a separate program in the backgr
 - Install Node and MySQL Workbench on your device
 - Run the **local_db_initialization** SQL script (located in the database directory of this project) in MySQL Workbench to initialize your local database.
 - Navigate to the backend directory in a terminal and run **npm install** to install the required node modules.
+- Create and set up your .env file in the backend directory to set your environment variables. The .env file should look something like this:
+![environment variables](./env.png)
 - Run **npm start** and the server will start up and connect to the local database.
 - Once the backend server is running, you can use either the Android or iOS version of the app.
 
