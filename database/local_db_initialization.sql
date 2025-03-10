@@ -14,11 +14,11 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS tasks (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(100) NOT NULL,
-    description VARCHAR(1000),
+    description VARCHAR(1000) DEFAULT '',
     date_created DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     due_date DATETIME DEFAULT NULL,
     date_completed DATETIME DEFAULT NULL,
-    task_status ENUM('Not Started', 'In Progress', 'Completed') NOT NULL,
+    task_status ENUM('Not Started', 'In Progress', 'Completed') DEFAULT ('Not Started'),
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
