@@ -43,8 +43,8 @@ INSERT INTO tasks (title, description, date_created, due_date, date_completed, t
 		'Complete the onboarding training that was assigned to you for the start of the new project.',
 		'2025-02-03 10:15:00',
 		'2025-02-07 17:00:00',
-		'2025-02-05 16:20:00',
-		'Completed',
+		NULL,
+		'In Progress',
 		2
     ),
     (
