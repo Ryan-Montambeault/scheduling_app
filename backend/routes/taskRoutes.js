@@ -1,9 +1,10 @@
 const express = require("express");
 const db = require("../dbConnection");
+const authMiddleware = require('./authMiddleware');
 const router = express.Router();
 
 // get all tasks for a particular user, unfiltered and sorted by most recent
-router.get('/:userId/tasks/', async (req, res) => {
+router.get('/:userId/tasks/', authMiddleware, async (req, res) => {
     try {
         const userId = req.params.userId;
         const query = 'SELECT * FROM tasks WHERE user_id = ? ORDER BY date_created DESC';
@@ -17,7 +18,7 @@ router.get('/:userId/tasks/', async (req, res) => {
 
 
 // get single task for a particular user by the task id
-router.get('/:userId/tasks/:taskId/', async (req, res) => {
+router.get('/:userId/tasks/:taskId/', authMiddleware, async (req, res) => {
     try {
         const userId = req.params.userId;
         const taskId = req.params.taskId;
@@ -36,7 +37,7 @@ router.get('/:userId/tasks/:taskId/', async (req, res) => {
 
 
 // get all "Not Started" tasks for a particular user, sorted by due date
-router.get('/:userId/tasks-not-started/', async (req, res) => {
+router.get('/:userId/tasks-not-started/', authMiddleware, async (req, res) => {
     try {
         const userId = req.params.userId;
         const query = 'SELECT * FROM tasks WHERE user_id = ? AND task_status = \'Not Started\' ORDER BY due_date DESC';
@@ -50,7 +51,7 @@ router.get('/:userId/tasks-not-started/', async (req, res) => {
 
 
 // get all "In Progress" tasks for a particular user, sorted by due date
-router.get('/:userId/tasks-in-progress/', async (req, res) => {
+router.get('/:userId/tasks-in-progress/', authMiddleware, async (req, res) => {
     try {
         const userId = req.params.userId;
         const query = 'SELECT * FROM tasks WHERE user_id = ? AND task_status = \'In Progress\' ORDER BY due_date DESC';
@@ -64,7 +65,7 @@ router.get('/:userId/tasks-in-progress/', async (req, res) => {
 
 
 // get all "Completed" tasks for a particular user, sorted by due date
-router.get('/:userId/tasks-completed/', async (req, res) => {
+router.get('/:userId/tasks-completed/', authMiddleware, async (req, res) => {
     try {
         const userId = req.params.userId;
         const query = 'SELECT * FROM tasks WHERE user_id = ? AND task_status = \'Completed\' ORDER BY due_date DESC';
@@ -78,7 +79,7 @@ router.get('/:userId/tasks-completed/', async (req, res) => {
 
 
 // create new task
-router.post('/:userId/create-task/', async (req, res) => {
+router.post('/:userId/create-task/', authMiddleware, async (req, res) => {
     const userId = req.params.userId;
     let { title, description = '', due_date } = req.body;
 
@@ -115,7 +116,7 @@ router.post('/:userId/create-task/', async (req, res) => {
 
 
 // edit existing task
-router.put('/:userId/tasks/:taskId/edit/', async (req, res) => {
+router.put('/:userId/tasks/:taskId/edit/', authMiddleware, async (req, res) => {
     const userId = req.params.userId;
     const taskId = req.params.taskId;
     let { title, description, due_date, task_status } = req.body;
@@ -163,7 +164,7 @@ router.put('/:userId/tasks/:taskId/edit/', async (req, res) => {
 
 
 // delete an existing task
-router.delete('/:userId/tasks/:taskId/delete', async (req, res) => {
+router.delete('/:userId/tasks/:taskId/delete', authMiddleware, async (req, res) => {
     try {
         const userId = req.params.userId;
         const taskId = req.params.taskId;
