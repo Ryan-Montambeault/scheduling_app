@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">SchedulingApp-Android</string>
+    <string name="app_name">Scheduling App</string>
+    <string name="login_header">Nice to see you!</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button_text">Login</string>
+    <string name="welcome_header">Welcome, %s</string>
+    <string name="tasks_not_started_header">Tasks Not Started</string>
+    <string name="tasks_in_progress_header">Tasks In Progress</string>
+    <string name="tasks_completed_header">Completed Tasks</string>
 </resources>
