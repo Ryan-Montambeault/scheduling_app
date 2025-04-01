@@ -1,4 +1,4 @@
-# Backend Setup and API Usage Guide
+# Backend Setup Guide
 
 The purpose of the backend is to connect the frontend with the backend without direct access. The backend acts as the intermediary between the user interface and the database, as the API is what makes direct calls to database. The API Routes will be developed in visual studio code using Express.JS.
 
@@ -12,11 +12,3 @@ NOTE: The backend server will have to be run as a separate program in the backgr
 ![environment variables](./env.png)
 - Run **npm start** and the server will start up and connect to the local database.
 - Once the backend server is running, you can use either the Android or iOS version of the app.
-
-
-## API Usage
-
-### Authentication Routes
-
-
-### Task Routes
