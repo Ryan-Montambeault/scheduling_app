@@ -21,16 +21,12 @@ class LoginViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val response = RetrofitClient.apiService.login(LoginRequest(email, password))
-
                 if (response.isSuccessful) {
-                    Log.d("Login", "Login successful: ${response.body()}")
                     _loginResult.postValue(response.body())
                 } else {
-                    Log.e("Login", "Login failed. Response code: ${response.code()}, ${response.message()}")
                     _loginResult.postValue(null)
                 }
             } catch (e: Exception) {
-                Log.e("Login", "Error: ${e.message}")
                 _loginResult.postValue(null)
             }
         }
@@ -39,13 +35,9 @@ class LoginViewModel : ViewModel() {
     fun logoutUser() {
         viewModelScope.launch {
             try {
-                // Call the API to perform logout
                 val response = RetrofitClient.apiService.logout()
-
-                // If logout is successful, post true to indicate success
                 _logoutResult.postValue(true)
             } catch (e: Exception) {
-                // If logout fails, post false to indicate failure
                 _logoutResult.postValue(false)
             }
         }

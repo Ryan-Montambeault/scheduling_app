@@ -1,6 +1,6 @@
 package com.example.schedulingapp_android.data.models
 
-data class TaskResponse(
+data class TaskCreateResponse(
     val message: String,
     val taskId: Int
 )

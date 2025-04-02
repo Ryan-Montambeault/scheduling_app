@@ -3,8 +3,8 @@ package com.example.schedulingapp_android.data.api
 import com.example.schedulingapp_android.data.models.LoginRequest
 import com.example.schedulingapp_android.data.models.LoginResponse
 import com.example.schedulingapp_android.data.models.Task
-import com.example.schedulingapp_android.data.models.TaskRequest
-import com.example.schedulingapp_android.data.models.TaskResponse
+import com.example.schedulingapp_android.data.models.TaskCreateRequest
+import com.example.schedulingapp_android.data.models.TaskCreateResponse
 import com.example.schedulingapp_android.data.models.TaskUpdateRequest
 import retrofit2.Response
 import retrofit2.http.Body
@@ -34,19 +34,24 @@ interface ApiService {
         @Path("taskId") taskId: Int
     ): Response<Task>
 
-    // Fetch filtered tasks
-    @GET("users/{userId}/{filter}/")
-    suspend fun getFilteredTasks(
-        @Path("userId") userId: Int,
-        @Path("filter") filter: String
-    ): Response<List<Task>>
+    // Fetch tasks not started
+    @GET("users/{userId}/tasks-not-started/")
+    suspend fun getTasksNotStarted(@Path("userId") userId: Int): Response<List<Task>>
+
+    // Fetch tasks in progress
+    @GET("users/{userId}/tasks-in-progress/")
+    suspend fun getTasksInProgress(@Path("userId") userId: Int): Response<List<Task>>
+
+    // Fetch completed tasks
+    @GET("users/{userId}/tasks-completed/")
+    suspend fun getCompletedTasks(@Path("userId") userId: Int): Response<List<Task>>
 
     // Create a task
     @POST("users/{userId}/create-task/")
     suspend fun createTask(
         @Path("userId") userId: Int,
-        @Body task: TaskRequest
-    ): Response<TaskResponse>
+        @Body task: TaskCreateRequest
+    ): Response<TaskCreateResponse>
 
     // Edit a task
     @PUT("users/{userId}/tasks/{taskId}/edit/")

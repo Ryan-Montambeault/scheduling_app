@@ -32,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.loginResult.observe(this) { response ->
             response?.let {
                 val userId = it.userId
+                val userName = it.userName
                 val message = it.message
 
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -39,6 +40,7 @@ class LoginActivity : AppCompatActivity() {
                 // Navigate to MainActivity and pass user data
                 val intent = Intent(this, MainActivity::class.java).apply {
                     putExtra("userId", userId)
+                    putExtra("userName", userName)
                 }
                 startActivity(intent)
                 finish()

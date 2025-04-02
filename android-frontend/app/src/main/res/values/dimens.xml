@@ -8,4 +8,7 @@
     <dimen name="toolbar_margin">35sp</dimen>
     <dimen name="profile_img_size">80sp</dimen>
     <dimen name="input_field_height">50sp</dimen>
+    <dimen name="button_text_size">11sp</dimen>
+    <dimen name="status_button_horizontal_margins">8sp</dimen>
+    <dimen name="task_box_title_size">18sp</dimen>
 </resources>

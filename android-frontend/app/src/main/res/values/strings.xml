@@ -8,4 +8,10 @@
     <string name="tasks_not_started_header">Tasks Not Started</string>
     <string name="tasks_in_progress_header">Tasks In Progress</string>
     <string name="tasks_completed_header">Completed Tasks</string>
+    <string name="not_started">Not Started</string>
+    <string name="in_progress">In Progress</string>
+    <string name="completed">Completed</string>
+    <string name="add_task">Add Task</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>
