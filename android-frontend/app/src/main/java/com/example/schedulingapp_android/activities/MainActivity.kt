@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schedulingapp_android.R
 import com.example.schedulingapp_android.data.adapters.TaskAdapter
 import com.example.schedulingapp_android.data.models.Task
+import com.example.schedulingapp_android.data.models.TaskCreateRequest
+import com.example.schedulingapp_android.data.models.TaskUpdateRequest
 import com.example.schedulingapp_android.viewmodels.TaskViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +26,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var addTaskButton: Button
     private var userId: Int = -1
     private var userName: String = ""
+    private var fragmentStatus: String = ""
+    private var updateRequest: TaskUpdateRequest? = null
+    private var createRequest: TaskCreateRequest? = null
 
     // Track the current filter state (null means "show all tasks")
     private var currentFilter: String? = null
@@ -88,14 +93,25 @@ class MainActivity : AppCompatActivity() {
         setupFilterButton(notStartedButton, "not_started", R.string.tasks_not_started_header)
         setupFilterButton(inProgressButton, "in_progress", R.string.tasks_in_progress_header)
         setupFilterButton(completedButton, "completed", R.string.tasks_completed_header)
+
+        // Fragment status and requests
+        fragmentStatus = intent.getStringExtra("fragmentStatus") ?: ""
+        updateRequest = intent.getSerializableExtra("updatedTask") as TaskUpdateRequest?
+        createRequest = intent.getSerializableExtra("createdTask") as TaskCreateRequest?
+
+        when (fragmentStatus) {
+            "Edited Task" -> updateRequest?.let { updateTaskInViewModel(it) }
+            "Created Task" -> createRequest?.let { createTaskInViewModel(it) }
+        }
     }
 
     // Open TaskActivity in "view" mode when a task is clicked on
     private fun openTaskActivity(task: Task) {
         val intent = Intent(this, TaskActivity::class.java).apply {
-            putExtra("taskId", task.id)
+            putExtra("task", task)
             putExtra("userId", userId)
-            putExtra("mode", "view")
+            putExtra("userName", userName)
+            putExtra("mode", "View")
         }
         startActivity(intent)
     }
@@ -103,9 +119,10 @@ class MainActivity : AppCompatActivity() {
     // Open TaskActivity in "edit" mode when edit button is clicked
     private fun openEditTaskActivity(task: Task) {
         val intent = Intent(this, TaskActivity::class.java).apply {
-            putExtra("taskId", task.id)
+            putExtra("task", task)
             putExtra("userId", userId)
-            putExtra("mode", "edit")
+            putExtra("userName", userName)
+            putExtra("mode", "Edit")
         }
         startActivity(intent)
     }
@@ -114,12 +131,22 @@ class MainActivity : AppCompatActivity() {
     private fun openCreateTaskActivity() {
         val intent = Intent(this, TaskActivity::class.java).apply {
             putExtra("userId", userId)
-            putExtra("mode", "create")
+            putExtra("userName", userName)
+            putExtra("mode", "Create")
         }
         startActivity(intent)
     }
 
-    // Delete task when delete button is clicked
+    private fun updateTaskInViewModel(updatedTask: TaskUpdateRequest) {
+        taskViewModel.editTask(userId, updatedTask.taskId, updatedTask)
+        fragmentStatus = ""
+    }
+
+    private fun createTaskInViewModel(createdTask: TaskCreateRequest) {
+        taskViewModel.createTask(userId, createdTask)
+        fragmentStatus = ""
+    }
+
     private fun deleteTask(task: Task) {
         taskAdapter.removeTask(task)
         taskViewModel.deleteTask(userId, task.id)
@@ -128,12 +155,10 @@ class MainActivity : AppCompatActivity() {
     private fun setupFilterButton(button: Button, status: String, headerResId: Int) {
         button.setOnClickListener {
             if (currentFilter == status) {
-                // If already filtering by this status, reset to default (show all tasks)
                 taskViewModel.getAllTasksForUser(userId)
                 welcomeTextView.text = getString(R.string.welcome_header, userName)
                 currentFilter = null
             } else {
-                // Otherwise, filter tasks by the selected status
                 when (status) {
                     "not_started" -> taskViewModel.getNotStartedTasks(userId)
                     "in_progress" -> taskViewModel.getInProgressTasks(userId)

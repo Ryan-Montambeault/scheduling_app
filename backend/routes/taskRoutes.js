@@ -80,15 +80,19 @@ router.get('/:userId/tasks-completed/', async (req, res) => {
 // create new task
 router.post('/:userId/create-task/', async (req, res) => {
     const userId = req.params.userId;
-    let { title, description = '', due_date } = req.body;
+    let { title, description = '', due_date, task_status } = req.body;
 
     if (!title) {
         return res.status(400).json({ error: 'Missing title' });
     }
 
+    if (!task_status) {
+        task_status = "Not Started"
+    }
+
     try {
-        let query = 'INSERT INTO tasks (user_id, title, description, due_date) VALUES (?, ?, ?, ?)';
-        let params = [userId, title, description, null];
+        let query = 'INSERT INTO tasks (user_id, title, description, due_date, task_status) VALUES (?, ?, ?, ?, ?)';
+        let params = [userId, title, description, null, task_status];
 
         if (due_date) {
             // convert to date object

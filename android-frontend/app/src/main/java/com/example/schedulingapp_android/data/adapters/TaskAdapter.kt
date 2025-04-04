@@ -40,14 +40,12 @@ class TaskAdapter(
 
     override fun getItemCount(): Int = tasks.size
 
-    // Function to update the task list
     fun updateTasks(newTasks: List<Task>) {
         tasks.clear()
         tasks.addAll(newTasks)
         notifyDataSetChanged()
     }
 
-    // Function to remove a task
     fun removeTask(task: Task) {
         val position = tasks.indexOf(task)
         if (position != -1) {

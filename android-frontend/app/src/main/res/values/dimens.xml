@@ -9,6 +9,9 @@
     <dimen name="profile_img_size">80sp</dimen>
     <dimen name="input_field_height">50sp</dimen>
     <dimen name="button_text_size">11sp</dimen>
-    <dimen name="status_button_horizontal_margins">8sp</dimen>
+    <dimen name="task_item_horizontal_margins">8sp</dimen>
     <dimen name="task_box_title_size">18sp</dimen>
+    <dimen name="task_field_text_size">14sp</dimen>
+    <dimen name="task_field_box_padding">10sp</dimen>
+    <dimen name="task_description_box_height">120sp</dimen>
 </resources>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <EditText
+        android:id="@+id/fragment_edit_create_task_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/primary"
+        android:hint="@string/task_title"
+        android:textColorHint="@color/design_default_color_on_primary"
+        android:inputType="text"
+        android:textSize="@dimen/task_field_text_size"
+        android:textColor="@color/design_default_color_on_primary"
+        android:padding="@dimen/task_field_box_padding"/>
+
+    <EditText
+        android:id="@+id/fragment_edit_create_task_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fragment_edit_create_task_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/section_top_margins"
+        android:background="@color/primary"
+        android:hint="@string/task_description"
+        android:textColorHint="@color/design_default_color_on_primary"
+        android:gravity="top|start"
+        android:inputType="textMultiLine"
+        android:minLines="4"
+        android:maxLines="10"
+        android:scrollbars="vertical"
+        android:overScrollMode="ifContentScrolls"
+        android:textSize="@dimen/task_field_text_size"
+        android:textColor="@color/design_default_color_on_primary"
+        android:padding="@dimen/task_field_box_padding"/>
+
+    <LinearLayout
+        android:id="@+id/fragment_edit_create_date_box"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fragment_edit_create_task_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/section_top_margins"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/primary"
+        android:padding="@dimen/task_field_box_padding">
+
+        <EditText
+            android:id="@+id/edit_text_task_due_date"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="@string/due_date"
+            android:textColorHint="@color/design_default_color_on_primary"
+            android:inputType="datetime"
+            android:focusable="false"
+            android:textSize="@dimen/task_field_text_size"
+            android:textColor="@color/design_default_color_on_primary"/>
+
+        <ImageView
+            android:id="@+id/button_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/calendar_img"
+            android:contentDescription="@string/select_date"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/design_default_color_on_primary"/>
+
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/spinner_task_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fragment_edit_create_date_box"
+        app:layout_constraintStart_toStartOf="@id/fragment_edit_create_date_box"
+        app:layout_constraintEnd_toEndOf="@id/fragment_edit_create_date_box"
+        android:layout_marginTop="@dimen/section_top_margins"
+        android:background="@color/primary"
+        android:textColor="@color/design_default_color_on_primary"
+        android:padding="@dimen/task_field_box_padding"/>
+
+    <Button
+        android:id="@+id/button_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/spinner_task_status"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/section_top_margins"
+        android:text="@string/cancel"
+        android:textSize="@dimen/button_text_size"/>
+
+    <Button
+        android:id="@+id/button_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/spinner_task_status"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/section_top_margins"
+        android:text="@string/done"
+        android:textSize="@dimen/button_text_size"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

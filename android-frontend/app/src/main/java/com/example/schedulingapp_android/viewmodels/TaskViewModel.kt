@@ -7,6 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.schedulingapp_android.data.api.RetrofitClient
 import com.example.schedulingapp_android.data.models.Task
+import com.example.schedulingapp_android.data.models.TaskCreateRequest
+import com.example.schedulingapp_android.data.models.TaskCreateResponse
+import com.example.schedulingapp_android.data.models.TaskUpdateRequest
 import kotlinx.coroutines.launch
 
 class TaskViewModel : ViewModel() {
@@ -71,6 +74,55 @@ class TaskViewModel : ViewModel() {
                 }
             } catch (e: Exception) {
                 _tasks.postValue(emptyList())
+            }
+        }
+    }
+
+    fun createTask(userId: Int, task: TaskCreateRequest) {
+        viewModelScope.launch {
+            try {
+                val response = RetrofitClient.apiService.createTask(userId, task)
+                if (response.isSuccessful) {
+                    val taskCreateResponse = response.body()
+                    taskCreateResponse?.let {
+                        val newTaskId = it.taskId
+
+                        val taskResponse = RetrofitClient.apiService.getTaskById(userId, newTaskId)
+                        if (taskResponse.isSuccessful) {
+                            val newTask = taskResponse.body()
+
+                            newTask?.let {
+                                val updatedTaskList =
+                                    _tasks.value?.toMutableList() ?: mutableListOf()
+                                updatedTaskList.add(it)
+                                _tasks.postValue(updatedTaskList)
+                            }
+                        } else {
+                            Log.e("TaskViewModel", "Failed to fetch newly created task: ${taskResponse.errorBody()?.string()}")
+                        }
+                    } ?: run {
+                        Log.e("TaskViewModel", "Failed to get taskId from response")
+                    }
+                } else {
+                    Log.e("TaskViewModel", "Failed to create task: ${response.errorBody()?.string()}")
+                }
+            } catch (e: Exception) {
+                Log.e("TaskViewModel", "Error creating task: ${e.message}", e)
+            }
+        }
+    }
+
+    fun editTask(userId: Int, taskId: Int, taskUpdateRequest: TaskUpdateRequest) {
+        viewModelScope.launch {
+            try {
+                val response = RetrofitClient.apiService.updateTask(userId, taskId, taskUpdateRequest)
+                if (response.isSuccessful) {
+                    getAllTasksForUser(userId)
+                } else {
+                    Log.e("TaskViewModel", "Failed to edit task: ${response.errorBody()?.string()}")
+                }
+            } catch (e: Exception) {
+                Log.e("TaskViewModel", "Error editing task: ${e.message}", e)
             }
         }
     }

@@ -37,7 +37,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activity_main_toolbar"
-        android:layout_marginTop="@dimen/section_top_margins"
+        android:layout_marginTop="@dimen/section_divider_top_margins"
         android:layout_marginHorizontal="@dimen/side_margins"
         android:text="@string/welcome_header"
         android:textColor="?attr/colorOnBackground"
@@ -51,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@id/activity_main_header"
         app:layout_constraintStart_toStartOf="@id/activity_main_header"
         app:layout_constraintEnd_toEndOf="@id/activity_main_header"
-        android:layout_marginTop="@dimen/section_top_margins">
+        android:layout_marginTop="@dimen/section_divider_top_margins">
 
         <Button
             android:id="@+id/activity_main_not_started_button"
@@ -60,7 +60,7 @@
             app:layout_constraintEnd_toStartOf="@+id/activity_main_in_progress_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="@dimen/status_button_horizontal_margins"
+            android:layout_marginEnd="@dimen/task_item_horizontal_margins"
             android:backgroundTint="@color/crimson"
             android:text="@string/not_started"
             android:textColor="@color/white"
@@ -85,7 +85,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/activity_main_in_progress_button"
-            android:layout_marginStart="@dimen/status_button_horizontal_margins"
+            android:layout_marginStart="@dimen/task_item_horizontal_margins"
             android:text="@string/completed"
             android:backgroundTint="@color/sea_green"
             android:textColor="@color/white"
