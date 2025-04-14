@@ -8,8 +8,6 @@
 import Foundation
  
 enum DataError: Error {
-    case networkError
-    case decodingError
     case invalidResponse
     case authenticationError
 }
