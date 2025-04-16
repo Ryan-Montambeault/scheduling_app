@@ -13,11 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Reset data on every launch (only for debug mode testing purposes) NOTE TO SELF: REMOVE WHEN FINISHED
-        #if DEBUG
-        DataService.shared.resetData()
-        print("DEBUG MODE: Data reset to initial values")
-        #endif
+        // Reset data on every launch (only for debug mode testing purposes) NOTE TO SELF: REMOVE WHEN FINISHED or else it clears UserDefault data on every launch
+//        #if DEBUG
+//        DataService.shared.resetData()
+//        print("DEBUG MODE: Data reset to initial values")
+//        #endif
                 
         return true
     }
